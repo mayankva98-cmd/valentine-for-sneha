@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Something Special 💖</title>
+
+  <!-- Open Graph / WhatsApp Preview -->
+  <meta property="og:title" content="Something Special For You 💖">
+  <meta property="og:description" content="Tap to see something made just for you 🧸🌹">
+  <meta property="og:image" content="https://i.imgur.com/3ZQ3ZQF.png">
+  <meta property="og:type" content="website">
+
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffd1dc, #ff9eb5);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      width: 100%;
+      max-width: 360px;
+      position: relative;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #d6336c;
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .from {
+      font-size: 0.9rem;
+      color: #a61e4d;
+      margin-bottom: 18px;
+    }
+
+    p {
+      color: #7a1f3d;
+      margin-bottom: 25px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 130px;
+    }
+
+    button {
+      border: none;
+      border-radius: 40px;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      position: absolute;
+      transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+      background: #ff4d6d;
+      color: white;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 20px rgba(255, 77, 109, 0.6);
+      animation: pulse 1.5s infinite;
+    }
+
+    #noBtn {
+      background: #f1a1b5;
+      color: white;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @keyframes pulse {
+      0% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.08); }
+      100% { transform: translateX(-50%) scale(1); }
+    }
+
+    .hearts span {
+      position: absolute;
+      bottom: -50px;
+      animation: float 6s linear infinite;
+      font-size: 22px;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-800px); opacity: 0; }
+    }
+
+    .popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .popup-content {
+      background: #fff0f5;
+      padding: 25px;
+      border-radius: 22px;
+      text-align: center;
+      animation: pop 0.4s ease;
+      width: 90%;
+      max-width: 320px;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.6); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .popup img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+
+    .screenshot {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #a61e4d;
+      opacity: 0.85;
+    }
+
+    .footer {
+      margin-top: 28px;
+      font-size: 0.75rem;
+      color: #7a1f3d;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>
+      Sneha Mishra,<br>
+      will you be my Valentine? 💖
+    </h1>
+
+    <div class="from">— from Mayank 💕</div>
+
+    <p>One small yes, one very happy heart 🧸🌹</p>
+
+    <div class="buttons">
+      <button id="yesBtn">YES 💕</button>
+      <button id="noBtn">NO 😢</button>
+    </div>
+
+    <div class="footer">Made with ❤️ just for you</div>
+  </div>
+
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="cute meme">
+      <h2>YAYYY! 💖</h2>
+      <p>
+        You just made my day 😍<br>
+        Officially my Valentine 🧸🌹
+      </p>
+      <div class="screenshot">📸 Screenshot this 💖</div>
+    </div>
+  </div>
+
+  <div class="hearts"></div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const popup = document.getElementById('popup');
+    const heartsContainer = document.querySelector('.hearts');
+
+    noBtn.addEventListener('mouseenter', moveNo);
+    noBtn.addEventListener('touchstart', moveNo);
+
+    function moveNo() {
+      const x = Math.random() * 220 - 110;
+      const y = Math.random() * 90;
+      noBtn.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random()*20-10}deg)`;
+    }
+
+    yesBtn.addEventListener('click', () => {
+      popup.style.display = 'flex';
+      createHearts(50);
+    });
+
+    function createHearts(count) {
+      const emojis = ['💖','💘','🌹','🧸'];
+      for (let i = 0; i < count; i++) {
+        const span = document.createElement('span');
+        span.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+        span.style.left = Math.random() * 100 + 'vw';
+        span.style.animationDuration = Math.random() * 3 + 3 + 's';
+        heartsContainer.appendChild(span);
+        setTimeout(() => span.remove(), 6000);
+      }
+    }
+  </script>
+
+</body>
+</html>
